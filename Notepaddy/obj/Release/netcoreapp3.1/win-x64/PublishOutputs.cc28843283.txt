@@ -1,0 +1,2 @@
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\win-x64\publish\Notepaddy.pdb
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\win-x64\publish\Notepaddy.exe

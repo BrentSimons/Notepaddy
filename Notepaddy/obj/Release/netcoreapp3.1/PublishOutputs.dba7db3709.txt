@@ -1,0 +1,5 @@
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\publish\Notepaddy.exe
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\publish\Notepaddy.dll
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\publish\Notepaddy.deps.json
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\publish\Notepaddy.runtimeconfig.json
+Z:\!!!Documents\Devops\Notepaddy\Notepaddy\bin\Release\netcoreapp3.1\publish\Notepaddy.pdb

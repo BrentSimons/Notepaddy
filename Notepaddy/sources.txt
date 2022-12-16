@@ -1,0 +1,22 @@
+﻿
+Intro video
+https://www.youtube.com/watch?v=gSfMNjWNoX0
+
+Horizontal Vertical aligment XAML
+https://stackoverflow.com/questions/50824890/xaml-menu-bottom-and-top-alignment
+https://www.c-sharpcorner.com/UploadFile/mahesh/wpf-layout-horizontal-and-vertical-alignment810/
+
+Yes No window
+https://stackoverflow.com/questions/1806247/how-to-make-a-simple-popup-box-in-visual-c
+https://stackoverflow.com/questions/3036829/how-do-i-create-a-message-box-with-yes-no-choices-and-a-dialogresult
+
+Stop window Resizing
+https://stackoverflow.com/questions/278304/what-is-the-best-way-to-stop-a-user-from-resizing-the-top-level-window-of-an-app
+
+Listbox
+https://wpf-tutorial.com/list-controls/listbox-control/
+
+Actions
+https://www.youtube.com/watch?v=mFFXuXjVgkU
+
+https://stackoverflow.com/questions/64295288/could-not-run-the-generateresource-task-because-msbuild-could-not-create-or-co
