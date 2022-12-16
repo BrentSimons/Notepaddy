@@ -22,7 +22,7 @@ https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 Actions
 https://www.youtube.com/watch?v=mFFXuXjVgkU
 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish
-https://stackoverflow.com/questions/64295288/could-not-run-the-generateresource-task-because-msbuild-could-not-create-or-co
+https://github.com/dotnet/sdk/issues/10902#issuecomment-567246586
 
 Database:
 
