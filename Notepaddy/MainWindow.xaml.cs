@@ -21,15 +21,16 @@ namespace Notepad
 
     public partial class MainWindow : Window
     {
-        public int activeNote; // 0 means no note is active, actual notes will start counting from higher or sth 
+        public noteObject activeNote; // 0 means no note is active, actual notes will start counting from higher or sth 
         public List<noteObject> notesListBox = new List<noteObject>();
 
         public MainWindow()
         {
             InitializeComponent();
-            activeNote = 0;
-            textBlock.Text = "Please select a note you would like to open!";
+            noteObject startingNote = new noteObject() { Title = "starting Note", ID = 0, Note = "Please select a note you would like to open!" };
 
+            activeNote = startingNote;
+            textBlock.Text = activeNote.Note;
 
             // connect to db and fetch notes
             notesListBox.Add(new noteObject() { Title = "Milestone", ID = 1001, Note = "a significant stage or event in the development of something. the speech is being hailed as a milestone in race relations" });
@@ -64,7 +65,7 @@ namespace Notepad
             }
             else
             {
-                // Keep note
+                // Keep the note
             }
         }
 
