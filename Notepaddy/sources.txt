@@ -20,3 +20,4 @@ Actions
 https://www.youtube.com/watch?v=mFFXuXjVgkU
 
 https://stackoverflow.com/questions/64295288/could-not-run-the-generateresource-task-because-msbuild-could-not-create-or-co
+https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
