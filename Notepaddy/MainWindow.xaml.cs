@@ -65,7 +65,7 @@ namespace Notepad
             }
             else
             {
-                // Keep the note
+                // Keep the note!
             }
         }
 
