@@ -9,14 +9,13 @@
     <Grid x:Name="grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="675" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="115" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
         </Grid.RowDefinitions>
-        <TextBox Grid.Column="0" x:Name="textBlock"></TextBox>
+        <TextBox Grid.Column="0" x:Name="textBlock" LostFocus="leaveTextBlockFocus"></TextBox>
         <Button x:Name="minimizeNoteButton" Width="18" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="0" Margin="26,4" Content="-" FontFamily="Cascadia Code SemiBold" Click="minimizeNoteButton_Click"/>
         <Button x:Name="closeNoteButton" Width="18" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="0" Margin="4" Content="X" FontFamily="Cascadia Code SemiBold" Click="deleteNoteButton_Click"/>
-        <Button x:Name="settingsButton" Width="115" Height="22" VerticalAlignment="Bottom" Grid.Column="1" Content="Settings" Click="settingsButton_Click"/>
         <ListBox Grid.Column="1" VerticalAlignment="Top" Height="389" Name="noteList" SelectionChanged="noteList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -25,5 +24,6 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Button x:Name="createNoteButton" Width="18" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1" Margin="8,26" Content="+"  FontFamily="Lucida Console"  Click="createNoteButton_Click" />
+        <TextBox x:Name="createNoteName" Text="" Width="80" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Margin="2,26"/>
     </Grid>
 </Window>

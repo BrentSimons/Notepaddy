@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Dapper;
+using Notepaddy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+// Used for console logging: use "Trace.WriteLine("text");" to log to output window
+using System.Diagnostics;
 
 namespace Notepad
 {
@@ -21,74 +25,126 @@ namespace Notepad
 
     public partial class MainWindow : Window
     {
-        public noteObject activeNote; // 0 means no note is active, actual notes will start counting from higher or sth 
-        public List<noteObject> notesListBox = new List<noteObject>();
+        // Used to populate the listbox object
+        public List<NoteObject> notesListBox = new List<NoteObject>();
 
+        // Used for connecting to DB
+        public QueryManagement queryManagement { get; } = new QueryManagement();
+
+        // This is the title of the active note
+        public string selectedGlobalNote;
         public MainWindow()
         {
             InitializeComponent();
-            noteObject startingNote = new noteObject() { Title = "starting Note", ID = 0, Note = "Please select a note you would like to open!" };
 
-            activeNote = startingNote;
-            textBlock.Text = activeNote.Note;
+            // The following query can be used to manually drop the table for testing 
+            /* queryManagement.getConnection().Execute("drop table noteObject;"); */
 
-            // connect to db and fetch notes
-            notesListBox.Add(new noteObject() { Title = "Milestone", ID = 1001, Note = "a significant stage or event in the development of something. the speech is being hailed as a milestone in race relations" });
-            notesListBox.Add(new noteObject() { Title = "Dev ops", ID = 1002, Note = " DevOps is a set of practices that combines software development (Dev) and IT operations (Ops). It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.[1] DevOps is complementary to agile software development; several DevOps aspects came from the agile way of working. Contents" });
-            notesListBox.Add(new noteObject() { Title = "Namur", ID = 1003, Note = "Namur (French: [namyʁ] (listen); German: [naˈmyːɐ̯] (listen); Dutch: Namen [ˈnaːmə(n)] (listen); Walloon: Nameur) is a city and municipality in Wallonia, Belgium. It is both the capital of the province of Namur and of Wallonia, hosting the Parliament of Wallonia, the Government of Wallonia and its administration." });
+            // This query makes the table (if it doesnt exist).
+            queryManagement.getConnection().Execute("create table if not exists noteObject(title varchar(50), note varchar(512));");
+            // SQLite does not enforce length of a varchar, in actuallity it can be up to 500million chars long
 
+            // The following query can be used to manually make a note object in the database for testing purposes:
+            /* queryManagement.getConnection().Execute("insert into noteObject(title, note ) values(@title, @note)",
+                new {title = "Milestone", note = "blablablablablablablablablablablabla" }); */
+
+            // This adds some flavor text:
+            textBlock.Text = "Please select a note you would like to open!";
+
+            // Connects to the db and fetches all existing notes and puts them in a list.
+            notesListBox = queryManagement.getConnection().Query<NoteObject>("select * from noteObject").ToList();
+            // Populates the listbox object
             noteList.ItemsSource = notesListBox;
-        }
 
-        private void settingsButton_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Nog maken");
+            // This allows the user to newline in the textbox
+            textBlock.AcceptsReturn = true;
         }
 
         private void minimizeNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            // save text to database
+            // when the user presses this button the current text will be saved
+            queryManagement.getConnection().Execute("update noteObject set note=@note where title=@title",
+                new { title = selectedGlobalNote, note = textBlock.Text });
+
+            // the text box will be emptied and the selectedGlobalNote will be empited
             textBlock.Text = "";
+            selectedGlobalNote = "";
         }
 
         private void deleteNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result;
+            // Message for thte messagebox
             const string message = "Are you sure you want to delete this note?";
-            result = MessageBox.Show(message, "Delete note", MessageBoxButton.YesNo);
+
+            // Shows a messagebox prompting yes or no.
+            MessageBoxResult result = MessageBox.Show(message, "Delete note", MessageBoxButton.YesNo);
+
             if (result.ToString().Equals("Yes"))
             {
-                // Delete note
-                textBlock.Text = "eqeq";
-                // notesListBox.Remove();
+                // Reset the text on the machine
+                textBlock.Text = "";
+
+                // Delete note based on the title of the current selected note
+                queryManagement.getConnection().Execute("delete from noteObject where title=@title",
+                    new { title = selectedGlobalNote} );
+                selectedGlobalNote = "";
+
+                // Grab a new list of all note
+                notesListBox = queryManagement.getConnection().Query<NoteObject>("select * from noteObject").ToList();
+                // Put the new list as the item source
                 noteList.ItemsSource = notesListBox;
-            }
-            else
-            {
-                // Keep the note!
+                // Refresh the list
+                noteList.Items.Refresh();
             }
         }
 
         private void createNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Nog maken");
+            // Creates a new note with no text, the name of the note comes from the textbox next to the button, add it to the Database
+            queryManagement.getConnection().Execute("insert into noteObject(title , note ) values(@title, @note)",
+                new {title = createNoteName.Text, note = "" });
+
+            // Create the new note locally and add it to the listbox
+            NoteObject tempNoteObject = new NoteObject() { Title = createNoteName.Text, Note = "" };
+            notesListBox.Add(tempNoteObject);
+            // Refreshed the listbox
+            noteList.Items.Refresh();
         }
 
         private void noteList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // Check if the user selects a different item. 
+            // (Needed because deselecting when clicking on something else also counts as changing selection)
             if (noteList.SelectedItem != null)
             {
-                textBlock.Text = (noteList.SelectedItem as noteObject).Note;
+                // Set selectedGlobalNote title
+                selectedGlobalNote = (noteList.SelectedItem as NoteObject).Title;
 
+                // Since the Note text saved in the noteList is not always accurate we will
+                // pull this from the database.
+                List<string> selectedGlobalNoteText = queryManagement.getConnection().Query<string>("select note from noteObject where title = @title", new { title = selectedGlobalNote }).ToList();
+                // This has to be a list for some reason (probably did something wrong)
+                textBlock.Text = selectedGlobalNoteText[0];
+            }
+        }
+
+        private void leaveTextBlockFocus(object sender, RoutedEventArgs e)
+        {
+            // Make sure user has selected a note
+            if (selectedGlobalNote != "")
+            {
+                // when the user leaves the focus of the textblock the current text will be saved
+                queryManagement.getConnection().Execute("update noteObject set note=@note where title=@title",
+                    new { title = selectedGlobalNote, note = textBlock.Text });
             }
         }
     }
 
-
-    public class noteObject
+    // This is the NoteObject, the Title is the name of the note in the listbox
+    //                         the Note is the text in the textbox
+    public class NoteObject
     {
         public string Title { get; set; }
-        public int ID { get; set; }
         public string Note { get; set; }
     }
 }

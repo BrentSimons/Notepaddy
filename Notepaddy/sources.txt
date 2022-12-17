@@ -19,10 +19,16 @@ https://wpf-tutorial.com/list-controls/listbox-control/
 Github
 https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+Console logging
+https://stackoverflow.com/questions/160587/no-output-to-console-from-a-wpf-application
+
 Actions
 https://www.youtube.com/watch?v=mFFXuXjVgkU
 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish
 https://github.com/dotnet/sdk/issues/10902#issuecomment-567246586
 
 Database:
+https://www.youtube.com/watch?v=l1K2AEDByN0
+https://stackoverflow.com/questions/14096414/easy-way-to-refresh-listbox-in-wpf
+https://sqliteviewer.app/ - Webapp that can open a SQLite DB
 
