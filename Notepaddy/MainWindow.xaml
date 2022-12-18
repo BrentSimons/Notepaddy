@@ -23,6 +23,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <!-- Move the following down a bit -->
         <Button x:Name="createNoteButton" Width="18" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Column="1" Margin="8,26" Content="+"  FontFamily="Lucida Console"  Click="createNoteButton_Click" />
         <TextBox x:Name="createNoteName" Text="" Width="80" Height="18" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Column="1" Margin="2,26"/>
     </Grid>

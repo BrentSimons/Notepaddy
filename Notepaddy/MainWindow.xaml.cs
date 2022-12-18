@@ -100,6 +100,8 @@ namespace Notepad
 
         private void createNoteButton_Click(object sender, RoutedEventArgs e)
         {
+            // Possibly add duplicate detection
+
             // Creates a new note with no text, the name of the note comes from the textbox next to the button, add it to the Database
             queryManagement.getConnection().Execute("insert into noteObject(title , note ) values(@title, @note)",
                 new {title = createNoteName.Text, note = "" });
