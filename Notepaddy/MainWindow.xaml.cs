@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 // Used for console logging: use "Trace.WriteLine("text");" to log to output window
 using System.Diagnostics;
+using Microsoft.VisualBasic;
 
 namespace Notepad
 {
@@ -73,7 +74,7 @@ namespace Notepad
 
         private void deleteNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Message for thte messagebox
+            // Message for the messagebox
             const string message = "Are you sure you want to delete this note?";
 
             // Shows a messagebox prompting yes or no.
@@ -100,17 +101,29 @@ namespace Notepad
 
         private void createNoteButton_Click(object sender, RoutedEventArgs e)
         {
-            // Possibly add duplicate detection
+            // Get note title in textblock and query for note with that title
+            string tempNoteTitle = createNoteName.Text;
+            List<string> listNotesWithTempTitle = queryManagement.getConnection().Query<string>("select title from noteObject where title = @title", new { title = tempNoteTitle }).ToList();
 
-            // Creates a new note with no text, the name of the note comes from the textbox next to the button, add it to the Database
-            queryManagement.getConnection().Execute("insert into noteObject(title , note ) values(@title, @note)",
-                new {title = createNoteName.Text, note = "" });
+            // Check if the new note title already exists in the query
+            if (listNotesWithTempTitle.Contains(tempNoteTitle))
+            {
+                // The new note title already exists, throw an error messagebox informing user
+                const string message = "A note with this name already exists!";
+                MessageBox.Show(message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+            } else
+            {
+                // No other note exists with this name so we can continue
+                // Creates a new note with no text, the name of the note comes from the textbox next to the button, add it to the Database
+                queryManagement.getConnection().Execute("insert into noteObject(title , note ) values(@title, @note)",
+                    new { title = tempNoteTitle, note = "" });
 
-            // Create the new note locally and add it to the listbox
-            NoteObject tempNoteObject = new NoteObject() { Title = createNoteName.Text, Note = "" };
-            notesListBox.Add(tempNoteObject);
-            // Refreshed the listbox
-            noteList.Items.Refresh();
+                // Create the new note locally and add it to the listbox
+                NoteObject tempNoteObject = new NoteObject() { Title = tempNoteTitle, Note = "" };
+                notesListBox.Add(tempNoteObject);
+                // Refreshed the listbox
+                noteList.Items.Refresh();
+            }
         }
 
         private void noteList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
