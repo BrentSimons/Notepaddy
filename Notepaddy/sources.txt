@@ -32,3 +32,5 @@ https://www.youtube.com/watch?v=l1K2AEDByN0
 https://stackoverflow.com/questions/14096414/easy-way-to-refresh-listbox-in-wpf
 https://sqliteviewer.app/ - Webapp that can open a SQLite DB
 
+When i forgot to use SQL:
+https://www.w3schools.com/sql/
