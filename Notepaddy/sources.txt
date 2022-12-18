@@ -1,28 +1,27 @@
-﻿
-Intro video
+﻿Intro video:
 https://www.youtube.com/watch?v=gSfMNjWNoX0
 
-Horizontal Vertical aligment XAML
+Horizontal Vertical aligment XAML:
 https://stackoverflow.com/questions/50824890/xaml-menu-bottom-and-top-alignment
 https://www.c-sharpcorner.com/UploadFile/mahesh/wpf-layout-horizontal-and-vertical-alignment810/
 
-Yes No window
+Yes No window:
 https://stackoverflow.com/questions/1806247/how-to-make-a-simple-popup-box-in-visual-c
 https://stackoverflow.com/questions/3036829/how-do-i-create-a-message-box-with-yes-no-choices-and-a-dialogresult
 
-Stop window Resizing
-https://stackoverflow.com/questions/278304/what-is-the-best-way-to-stop-a-user-from-resizing-the-top-level-window-of-an-app
-
-Listbox
+Listbox:
 https://wpf-tutorial.com/list-controls/listbox-control/
 
-Github
+Github:
 https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
+https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/adding-a-license-to-a-repository
 
-Console logging
+Other C#:
+https://www.geeksforgeeks.org/c-sharp-how-to-check-whether-a-list-contains-a-specified-element/
 https://stackoverflow.com/questions/160587/no-output-to-console-from-a-wpf-application
+https://stackoverflow.com/questions/278304/what-is-the-best-way-to-stop-a-user-from-resizing-the-top-level-window-of-an-app
 
-Actions
+Actions:
 https://www.youtube.com/watch?v=mFFXuXjVgkU
 https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish
 https://github.com/dotnet/sdk/issues/10902#issuecomment-567246586
@@ -32,5 +31,6 @@ https://www.youtube.com/watch?v=l1K2AEDByN0
 https://stackoverflow.com/questions/14096414/easy-way-to-refresh-listbox-in-wpf
 https://sqliteviewer.app/ - Webapp that can open a SQLite DB
 
-When i forgot to use SQL:
+SQL:
 https://www.w3schools.com/sql/
+
