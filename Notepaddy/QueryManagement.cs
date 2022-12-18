@@ -14,6 +14,5 @@ namespace Notepaddy
             // The connection string passed to the constructor specifies the path to the database file and the option to create a new database if it does not exist.
             return new SQLiteConnection(@"Data Source=.\NoteDatabase.db;New=true;");
         }
-
     }
 }

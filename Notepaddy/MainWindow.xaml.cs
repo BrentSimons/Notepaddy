@@ -67,7 +67,7 @@ namespace Notepad
             queryManagement.getConnection().Execute("update noteObject set note=@note where title=@title",
                 new { title = selectedGlobalNote, note = textBlock.Text });
 
-            // the text box will be emptied and the selectedGlobalNote will be empited
+            // the text box will be emptied and the selectedGlobalNote will be emptied
             textBlock.Text = "";
             selectedGlobalNote = "";
         }
