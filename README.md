@@ -6,7 +6,7 @@ Notepaddy is a simple notepad application that saves notes in a local database. 
 
 - Create, edit, and delete notes
 - Save notes to a local SQLite database
-- View all existing notes
+- Overview of existing notes
 
 ## Requirements
 
