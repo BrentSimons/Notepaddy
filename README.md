@@ -2,7 +2,7 @@
 
 Notepaddy is a simple notepad application that saves notes in a local database. It was built using WPF and Dapper to connect to a SQLite database.
 
-![[Notepaddy.png]]
+![Picture of the application.](Notepaddy.png)
 
 ## Features
 
